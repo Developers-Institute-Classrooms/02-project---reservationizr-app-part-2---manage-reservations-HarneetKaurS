@@ -27,7 +27,7 @@ app.post(
             partySize: Joi.number().min(1).required(),
             date: Joi.date().min('now').required(),
             restaurantName: Joi.string().required()
-
+  
         }),
     }),
     async (req, res, next) => {
