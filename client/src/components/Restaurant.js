@@ -10,8 +10,10 @@ const Restaurant = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchUrl = `http://localhost:5001/restaurants/${id}`;
+      const fetchUrl =  await fetch(`http://localhost:5001/restaurants/${id}`);
       // FIXME: Make a fetch request and call setRestaurant with the response body
+      const data = await fetchUrl.json();
+      setRestaurant(data);
       setIsLoading(false);
     };
     fetchData();
@@ -24,6 +26,11 @@ const Restaurant = () => {
   return (
     <>
       <CreateReservation restaurantName={restaurant.name} />
+      <div key={restaurant.id}>
+      <img src={restaurant.image} alt={restaurant.name} />
+          <p> {restaurant.name} </p>
+          <p> {restaurant.description} </p>
+          </div>
     </>
   );
 };
