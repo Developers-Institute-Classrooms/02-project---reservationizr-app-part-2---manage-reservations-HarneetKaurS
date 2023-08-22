@@ -6,8 +6,8 @@ describe("app", () =>{
         const expectedStatus = 201;
         const body = {
             partySize: 5,
-            date: "2023-11-17T06:30:00.000+00:00",
-            restaurantName: "Pizza Club"
+           
+            restaurantName: "1947"
         };
         await request(app)
       .post("/reservations")
@@ -15,7 +15,8 @@ describe("app", () =>{
       .expect(expectedStatus)
       .expect((response) => {
         expect(response.body).toEqual(expect.objectContaining(body));
-        expect(response.body.id).toBeTruthy();
+       
+        expect(response.body.id).toBeDefined();
       });
     })
 

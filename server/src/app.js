@@ -8,7 +8,7 @@ const formatReservation = require ("./formatReservation");
 const { celebrate, Joi, errors, Segments } = require("celebrate");
 const { auth } = require('express-oauth2-jwt-bearer');
 const validId = require ("./validId");
-const { now } = require("mongoose");
+// const { now } = require("mongoose");
 const app = express();
 
 const checkJwt = auth({
@@ -25,7 +25,7 @@ app.post(
     celebrate({
         [Segments.BODY]: Joi.object().keys({
             partySize: Joi.number().min(1).required(),
-            date: Joi.date().min('now').required(),
+            date: Joi.date().required(),
             restaurantName: Joi.string().required()
   
         }),
