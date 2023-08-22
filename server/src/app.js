@@ -33,12 +33,12 @@ app.post(
     async (req, res, next) => {
         try{
             const {body, auth} = req;
-            const reservationbody = {
+            const reservationBody = {
                 createdBy: auth.payload.sub,
         ...body,
      
             }
-            const reservation = new ReservationModel(reservationbody);
+            const reservation = new ReservationModel(reservationBody);
             await reservation.save();
             return res.status(201).send(formatReservation(reservation));
         } catch(error) {
