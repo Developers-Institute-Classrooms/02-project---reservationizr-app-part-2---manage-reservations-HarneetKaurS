@@ -68,6 +68,31 @@ app.get("/restaurants/:id", async (request, response) =>{
     return response.status(200).send(formattedRestaurant);
 })
 
+app.get("/reservations", async (request, response) =>{
+    
+    const reservations = await ReservationModel.find({});
+    
+   const formattedReservations = reservations.map(reservation => {
+return formatReservation(reservation)
+   })
+    return response.status(200).send(formattedReservations);
+});
+
+app.get("/reservations/:id", async (request, response) =>{
+    const id = request.params.id;
+    if (!validId(id)){
+        return response.status(400).send({ message: "id provided is invalid"})
+    }
+    const reservation = await ReservationModel.findById(id);
+    if (!reservation ) {
+        return response.status(404).send({ message: "The reservation trying to be retrieved does not exist"})}
+    
+   const formattedReservation = formatReservation(reservation)
+  
+ return response.status(200).send(formattedReservation);
+});
+
+
 app.use(errors());
 
 module.exports = app;

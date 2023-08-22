@@ -6,7 +6,7 @@ describe("app", () =>{
         const expectedStatus = 201;
         const body = {
             partySize: 5,
-           
+           date: "2023-12-03T07:00:00.000Z",
             restaurantName: "1947"
         };
         await request(app)
