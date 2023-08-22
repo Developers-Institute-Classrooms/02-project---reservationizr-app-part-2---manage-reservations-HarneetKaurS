@@ -66,5 +66,32 @@ describe("app", () =>{
         });
     })
 
+    test("GET / restaurants/:id should respond with id provided is invalid", async () =>{
+        const expected = 
+            {
+                message: "id provided is invalid"
+            };
+            
+        await request(app)
+        .get("/restaurants/256278927")
+        .expect(400)
+        .expect((response) => {
+            expect(response.body).toEqual(expected);
+        });
+    })
+
+    test("GET / restaurants/:id should respond with the restaurant trying to be retrieved does not exist", async () =>{
+        const expected = 
+            {
+                message: "The restaurant trying to be retrieved does not exist"
+            };
+            
+        await request(app)
+        .get("/restaurants/616005cae3c8e880c13dc0d8")
+        .expect(404)
+        .expect((response) => {
+            expect(response.body).toEqual(expected);
+        });
+    })
 
 })
