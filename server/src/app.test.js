@@ -7,7 +7,8 @@ describe("app", () =>{
         const body = {
             partySize: 5,
            date: "2023-12-03T07:00:00.000Z",
-            restaurantName: "1947"
+            restaurantName: "1947",
+           userId: "mock-user-id",
         };
         await request(app)
       .post("/reservations")
@@ -18,6 +19,16 @@ describe("app", () =>{
        
         expect(response.body.id).toBeDefined();
       });
+    })
+
+    test ("POST / reservations returns a 400 when an invalid request body is provided ", async () =>{
+        const expectedStatus = 400;
+        const body = { };
+        await request(app)
+      .post("/reservations")
+      .send(body)
+      .expect(expectedStatus)
+     
     })
 
     test("GET / restaurants displays all the restaurants", async () =>{

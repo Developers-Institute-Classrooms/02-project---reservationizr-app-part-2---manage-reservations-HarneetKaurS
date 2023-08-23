@@ -4,7 +4,7 @@ const {Schema} = mongoose;
 
 const reservationSchema = new Schema ({
     partySize: { type: Number, required: true},
-    date:{ type: String, required: true},
+    date:{ type: Date, required: true},
     restaurantName: { type: String, required: true},
     createdBy: { type: String, required: true}
 });
