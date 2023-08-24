@@ -10,6 +10,7 @@ const ReservationList = () => {
   const response = await fetch ("http://localhost:5001/reservations");
   const data = await response.json();
   setReservations(data);
+
   };
 
   useEffect(() =>{

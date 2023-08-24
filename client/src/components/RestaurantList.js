@@ -9,6 +9,7 @@ const RestaurantList = () => {
     const response = await fetch ("http://localhost:5001/restaurants");
     const data = await response.json();
     setRestaurants(data);
+  
     };
   
     useEffect(() =>{

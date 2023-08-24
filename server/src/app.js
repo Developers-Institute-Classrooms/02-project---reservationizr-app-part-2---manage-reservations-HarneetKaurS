@@ -34,7 +34,7 @@ app.post(
         try{
             const {body, auth} = req;
             const reservationBody = {
-                createdBy: auth.payload.sub,
+                userId: auth.payload.sub,
         ...body,
      
             }
@@ -48,6 +48,7 @@ app.post(
     }
     )
 
+    
 app.get("/restaurants", async (request, response) =>{
     const restaurants = await RestaurantModel.find({});
     const formattedRestaurants = restaurants.map(restaurant => {
