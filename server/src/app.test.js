@@ -8,7 +8,7 @@ describe("app", () =>{
             partySize: 5,
            date: "2023-12-03T07:00:00.000Z",
             restaurantName: "1947",
-           userId: "mock-user-id",
+            
         };
         await request(app)
       .post("/reservations")

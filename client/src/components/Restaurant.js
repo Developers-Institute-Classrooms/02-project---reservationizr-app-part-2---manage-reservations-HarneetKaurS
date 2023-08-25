@@ -30,7 +30,7 @@ const Restaurant = () => {
         <div className="img">
       <img src={restaurant.image} alt={restaurant.name} />
       </div>
-      <div className="details">
+      <div className="restaurantdetails">
           <p className="restaurantname"> {restaurant.name} </p>
           <p> {restaurant.description} </p>
           </div>

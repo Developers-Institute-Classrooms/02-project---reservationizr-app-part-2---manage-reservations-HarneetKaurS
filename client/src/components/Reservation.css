@@ -1,0 +1,21 @@
+.reservation {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px dashed #ccc;
+}
+.restaurant-name {
+  font-weight: bold;
+}
+.partysize {
+  font-weight: bold;
+}
+.details {
+  border: 0.25rem solid lightgray;
+  background-color: lightgray;
+  text-decoration: none;
+  color: black;
+  padding: 0.25rem;
+  margin-bottom: 1rem;
+  width: 6.75rem;
+  border-radius: 0.5rem;
+}
