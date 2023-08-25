@@ -1,0 +1,19 @@
+.reserve {
+  text-align: left;
+}
+label,
+input {
+  display: block;
+}
+input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem;
+}
+.submit {
+  background: red;
+  color: white;
+  padding: 0.5rem;
+  border: none;
+  font-size: large;
+}

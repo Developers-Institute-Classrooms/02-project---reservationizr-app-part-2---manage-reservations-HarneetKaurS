@@ -57,7 +57,7 @@ const CreateReservation = ({ restaurantName }) => {
   }
   return (
     <>
-      <h1> Reserve {restaurantName} </h1>
+      <h2 className="reserve"> Reserve {restaurantName} </h2>
       <form onSubmit={handleSubmit}>
         <p>
           <label htmlFor="partySize"> Number of guests</label>
@@ -78,9 +78,11 @@ const CreateReservation = ({ restaurantName }) => {
             selected={date}
             onChange={(date) => setDate(date)}
             minDate={new Date()}
+            showTimeSelect
+            dateFormat="Pp"
           />
         </p>
-        <button disabled={isLoading}>Submit</button>
+        <button className="submit" disabled={isLoading}>Submit</button>
       </form>
     </>
   );
