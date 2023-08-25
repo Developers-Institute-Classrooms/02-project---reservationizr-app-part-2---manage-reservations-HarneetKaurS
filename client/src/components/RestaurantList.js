@@ -20,14 +20,16 @@ const RestaurantList = () => {
     <>
       <h1>Restaurants</h1>
       {restaurants.map((restaurant) => (
-        <div key={restaurant.id}>
-          <img src={restaurant.image} alt={restaurant.name} />
-          <p> {restaurant.name} </p>
-          <p> {restaurant.description} </p>
+        <div className="restaurants" key={restaurant.id}>
+          <img className="img" src={restaurant.image} alt={restaurant.name} />
+          <div className="grid">
+          <p className="restaurantname"> {restaurant.name} </p>
+          <p className="description"> {restaurant.description} </p>
           
-          <Link to={`/restaurants/${restaurant.id}`} >
+          <Link to={`/restaurants/${restaurant.id}`} className="reservenow">
             Reserve now <code>&#8594;</code>
           </Link>
+          </div>
         </div>
       ))}
     </>
