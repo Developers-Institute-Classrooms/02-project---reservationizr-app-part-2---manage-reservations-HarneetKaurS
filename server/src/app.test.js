@@ -106,4 +106,86 @@ describe("app", () =>{
         });
     })
 
+    test("GET /reservations should respond with list of reservations", async () =>{
+        const expected = [
+            {
+                id: "507f1f77bcf86cd799439011",
+                partySize: 4,
+                date: "2023-11-17T06:30:00.000Z",
+                userId: "mock-user-id",
+                restaurantName: "Island Grill"  
+              },
+              {
+                id: "614abf0a93e8e80ace792ac6",
+                partySize: 2,
+                 date: "2023-12-03T07:00:00.000Z",
+                 userId: "mock-user-id",
+                restaurantName: "Green Curry"
+     
+              },
+              {
+                "id": "61679189b54f48aa6599a7fd",
+                "partySize": 2,
+                "date": "2023-12-03T07:00:00.000Z",
+                "restaurantName": "Green Curry",
+                "userId": "another-user-id"
+            }
+            
+            ];
+             
+        await request(app)
+        .get("/reservations")
+        .expect(200)
+        .expect((response) => {
+            expect(response.body).toEqual(expected);
+        });
+    });
+
+
+    test("GET /reservations/:id should respond with a single reservation", async () =>{
+        const expected = 
+            {
+                id: "507f1f77bcf86cd799439011",
+                partySize: 4,
+                date: "2023-11-17T06:30:00.000Z",
+                userId: "mock-user-id",
+                restaurantName: "Island Grill"  
+              };
+           
+        await request(app)
+        .get("/reservations/507f1f77bcf86cd799439011")
+        .expect(200)
+        .expect((response) => {
+            expect(response.body).toEqual(expected);
+        });
+    });
+
+    test("GET /reservations/:id should respond with id provided is invalid", async () =>{
+        const expected = 
+            {
+                message: "id provided is invalid"
+              };
+           
+        await request(app)
+        .get("/reservations/1aaaaa1111")
+        .expect(400)
+        .expect((response) => {
+            expect(response.body).toEqual(expected);
+        });
+    });
+
+
+    test("GET /reservations/:id should respond with Reservation does not exist with id paramete", async () =>{
+        const expected = 
+            {
+                message: "The reservation trying to be retrieved does not exist"
+              };
+           
+        await request(app)
+        .get("/reservations/507f1f77bcf86cd79943901a")
+        .expect(404)
+        .expect((response) => {
+            expect(response.body).toEqual(expected);
+        });
+    });
 })
