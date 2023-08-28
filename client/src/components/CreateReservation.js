@@ -16,8 +16,11 @@ const CreateReservation = ({ restaurantName }) => {
 
   const { getAccessTokenSilently } = useAuth0();
 
+   
   const handleSubmit = async (event) => {
     event.preventDefault();
+  
+
     const accessToken = await getAccessTokenSilently();
 
     setIsLoading(true);
@@ -41,7 +44,7 @@ const CreateReservation = ({ restaurantName }) => {
       setErrorStatus(response.status);
     } else {
       setIsLoading(false);
-      navigate("/");
+      navigate("/reservations");
     }
   };
 
@@ -55,6 +58,7 @@ const CreateReservation = ({ restaurantName }) => {
       </>
     );
   }
+
   return (
     <>
       <h2 className="reserve"> Reserve {restaurantName} </h2>
@@ -65,6 +69,7 @@ const CreateReservation = ({ restaurantName }) => {
             type="number"
             id="partySize"
             value={partySize}
+            min="1"
             onChange={(event) => {
               setPartySize(event.target.value);
             }}
@@ -82,8 +87,11 @@ const CreateReservation = ({ restaurantName }) => {
             dateFormat="Pp"
           />
         </p>
-        <button className="submit" disabled={isLoading}>Submit</button>
+        
+        <button  className="submit" disabled={isLoading}>Submit</button>
+        
       </form>
+      
     </>
   );
 };

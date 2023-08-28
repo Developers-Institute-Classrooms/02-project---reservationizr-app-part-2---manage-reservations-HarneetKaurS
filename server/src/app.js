@@ -56,26 +56,27 @@ app.get("/restaurants", async (request, response) => {
 app.get("/restaurants/:id", async (request, response) => {
   const id = request.params.id;
   if (!validId(id)) {
-    return response.status(400).send({ message: "id provided is invalid" });
+    return response.status(400).send({ error: "invalid id provided" });
   }
   const restaurant = await RestaurantModel.findById(id);
   if (!restaurant) {
-    return response
-      .status(404)
-      .send({
-        message: "The restaurant trying to be retrieved does not exist",
-      });
+    return response.status(404).send({
+      error: "restaurant not found",
+    });
   }
   const formattedRestaurant = formatRestaurant(restaurant);
   return response.status(200).send(formattedRestaurant);
 });
 
-// app.get( "/reservations", checkJwt, async (request, response) =>{
-// const reservations = await ReservationModel.find({ userId: request.auth.payload.sub })
-// return response.status(200).send(reservations)
-// });
+app.get("/reservations", checkJwt, async (request, response) => {
+  const reservations = await ReservationModel.find({
+    userId: request.auth.payload.sub,
+  });
 
-app.get("/reservations", async (request, response) => {
+  return response.status(200).send(reservations);
+});
+
+/* app.get("/reservations", async (request, response) => {
   const reservations = await ReservationModel.find({});
 
   const formattedReservations = reservations.map((reservation) => {
@@ -83,19 +84,19 @@ app.get("/reservations", async (request, response) => {
   });
   return response.status(200).send(formattedReservations);
 });
+*/
 
 /* app.get("/reservations/:id", async (request, response) => {
   const id = request.params.id;
   if (!validId(id)) {
-    return response.status(400).send({ message: "id provided is invalid" });
+    return response.status(400).send({ "error": "invalid id provided" });
   }
   const reservation = await ReservationModel.findById(id);
   if (!reservation) {
-    return response
-      .status(404)
-      .send({
-        message: "The reservation trying to be retrieved does not exist",
-      });
+    return response.status(404).send({
+      
+"error": "not found"
+    });
   }
 
   const formattedReservation = formatReservation(reservation);
@@ -103,28 +104,26 @@ app.get("/reservations", async (request, response) => {
   return response.status(200).send(formattedReservation);
 });
 */
- app.get("/reservations/:id", checkJwt, async (request, response) => {
+app.get("/reservations/:id", checkJwt, async (request, response) => {
   const id = request.params.id;
   if (!validId(id)) {
-    return response.status(400).send({ message: "id provided is invalid" });
+    return response.status(400).send({ error: "invalid id provided" });
   }
   const reservation = await ReservationModel.findById(id);
   if (!reservation) {
-    return response
-      .status(404)
-      .send({
-        message: "The reservation trying to be retrieved does not exist",
-      });
+    return response.status(404).send({
+      error: "not found",
+    });
   }
 
   const formattedReservation = formatReservation(reservation);
-if (request.auth.payload.sub === reservation.userId) {
-  return response.status(200).send(formattedReservation);
-} 
-else{
-    return response.status(403).send( { message: "user does not have permission"});
-}
-
+  if (request.auth.payload.sub === reservation.userId) {
+    return response.status(200).send(formattedReservation);
+  } else {
+    return response.status(403).send({
+      error: "user does not have permission to access this reservation",
+    });
+  }
 });
 
 app.use(errors());
