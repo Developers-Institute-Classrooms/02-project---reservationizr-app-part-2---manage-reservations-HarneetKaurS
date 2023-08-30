@@ -1,0 +1,15 @@
+.reservations {
+  display: grid;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px dashed #ccc;
+}
+@media (min-width: 35rem) {
+  .reservations {
+    grid-template-columns: 1fr 2fr 1fr;
+    padding: 0.5rem;
+  }
+}
+.detailss {
+  margin-top: 1rem;
+}
